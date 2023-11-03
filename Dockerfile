@@ -1,0 +1,35 @@
+# syntax = docker/dockerfile:experimental
+
+ARG PHP_VERSION=8.2
+ARG NODE_VERSION=18
+FROM fideloper/fly-laravel:${PHP_VERSION} as base
+ARG PHP_VERSION
+LABEL fly_launch_runtime="laravel"
+COPY . /var/www/html
+RUN composer install --optimize-autoloader --no-dev \
+    && mkdir -p storage/logs \
+    && php artisan optimize:clear \
+    && chown -R www-data:www-data /var/www/html \
+    && sed -i 's/protected \$proxies/protected \$proxies = "*"/g' app/Http/Middleware/TrustProxies.php \
+    && echo "MAILTO=\"\"\n* * * * * www-data /usr/bin/php /var/www/html/artisan schedule:run" > /etc/cron.d/laravel \
+    && cp .fly/entrypoint.sh /entrypoint \
+    && chmod +x /entrypoint
+
+FROM node:${NODE_VERSION} as node_modules_go_brrr
+RUN mkdir /app
+WORKDIR /app
+COPY . .
+COPY --from=base /var/www/html/vendor /app/vendor
+RUN npm install \
+    && npm run build
+
+FROM base
+# Packages like Laravel Nova may have added assets to the public directory
+# or maybe some custom assets were added manually! Either way, we merge
+# in the assets we generated above rather than overwrite them
+COPY --from=node_modules_go_brrr /app/public /var/www/html/public-npm
+RUN rsync -ar /var/www/html/public-npm/ /var/www/html/public/ \
+    && rm -rf /var/www/html/public-npm \
+    && chown -R www-data:www-data /var/www/html/public
+EXPOSE 8080
+ENTRYPOINT ["/entrypoint"]
