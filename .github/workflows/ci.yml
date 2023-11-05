@@ -52,10 +52,21 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: "npm"
+      
+      - name: Install Node dependencies
+        run: |
+          npm ci
+
+      - name: Run ESLint
+        run: |
+          npx eslint resources/js
+
+      - name: Run Prettier
+        run: |
+          npx prettier --check resources
 
       - name: Build frontend assets
         run: |
-          npm ci
           npm run build
 
       - name: Prepare Laravel
