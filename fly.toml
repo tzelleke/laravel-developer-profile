@@ -8,6 +8,7 @@ primary_region = "ams"
 console_command = "php /var/www/html/artisan tinker"
 
 [build]
+dockerfile = "Dockerfile.fly"
 [build.args]
 NODE_VERSION = "18"
 PHP_VERSION = "8.2"
