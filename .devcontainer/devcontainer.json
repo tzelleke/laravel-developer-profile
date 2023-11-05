@@ -6,10 +6,14 @@
     "customizations": {
         "vscode": {
             "extensions": [
-				"DEVSENSE.phptools-vscode",
-				"onecentlin.laravel-blade",
-				"ms-azuretools.vscode-docker"
-			],
+                "DEVSENSE.phptools-vscode",
+                "GitHub.copilot",
+                "GitHub.copilot-chat",
+                "esbenp.prettier-vscode",
+                "ms-azuretools.vscode-docker",
+                "onecentlin.laravel-blade",
+                "shufo.vscode-blade-formatter"
+            ],
             "settings": {
                 "php.format.codeStyle": "PSR-2"
             }
