@@ -1,1 +1,28 @@
 @import 'bootstrap';
+
+:root {
+    --tz-primary: hsla(237, 31%, 35%, 1);
+    --pink: #e83e8c;
+    --tz-bg-primary: linear-gradient(
+        45deg,
+        var(--tz-primary) 0%,
+        hsla(230, 25%, 18%, 1) 72%,
+        hsla(220, 19%, 13%, 1) 100%
+    );
+}
+
+.bg-primary {
+    background: var(--tz-primary);
+}
+
+.navbar {
+    background: var(--tz-bg-primary);
+    box-shadow:
+        0 0.5rem 1rem #00000026,
+        inset 0 -1px #ffffff26;
+
+    .nav {
+        --bs-nav-link-color: var(--bs-navbar-color);
+        --bs-nav-link-hover-color: var(--bs-navbar-hover-color);
+    }
+}
