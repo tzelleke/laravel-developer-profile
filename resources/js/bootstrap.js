@@ -6,6 +6,7 @@
 
 /* eslint-disable import/no-extraneous-dependencies */
 import axios from 'axios';
+// eslint-disable-next-line no-unused-vars
 import {Collapse} from 'bootstrap';
 
 // eslint-disable-next-line no-undef
