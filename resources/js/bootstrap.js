@@ -4,10 +4,13 @@
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
+/* eslint-disable import/no-extraneous-dependencies */
 import axios from 'axios';
 import {Collapse} from 'bootstrap';
 
+// eslint-disable-next-line no-undef
 window.axios = axios;
+// eslint-disable-next-line no-undef
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /**
