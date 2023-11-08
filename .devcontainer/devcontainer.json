@@ -6,19 +6,23 @@
     "customizations": {
         "vscode": {
             "extensions": [
-				"DEVSENSE.phptools-vscode",
-				"GitHub.copilot",
-				"GitHub.copilot-chat",
-				"dbaeumer.vscode-eslint",
-				"esbenp.prettier-vscode",
-				"ms-azuretools.vscode-docker",
-				"onecentlin.laravel-blade",
-				"shufo.vscode-blade-formatter"
-			],
+                "DEVSENSE.phptools-vscode",
+                "GitHub.copilot",
+                "GitHub.copilot-chat",
+                "dbaeumer.vscode-eslint",
+                "esbenp.prettier-vscode",
+                "ms-azuretools.vscode-docker",
+                "onecentlin.laravel-blade",
+                "shufo.vscode-blade-formatter",
+                "xdebug.php-debug"
+            ],
             "settings": {
                 "php.format.codeStyle": "PSR-2"
             }
         }
     },
-    "remoteUser": "sail"
+    "remoteUser": "sail",
+    "mounts": [
+        "source=${localEnv:HOME}/.ssh,target=/home/sail/.ssh,type=bind,consistency=cached"
+    ]
 }
